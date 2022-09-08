@@ -10,6 +10,11 @@ jobs:
       - uses: actions/checkout@master
         with:
           repository: eraserhd/parinfer-rust
+      - run: |
+          mkdir -p .cargo/
+          echo "[target.x86_64-apple-darwin]" >> .cargo/config
+          echo "linker = "x86_64-apple-darwin14-clang"" >> .cargo/config
+          echo "ar = "x86_64-apple-darwin14-ar"" >> .cargo/config
 #      - uses: actions-rs/toolchain@master
 #        with:
 #          toolchain: stable
