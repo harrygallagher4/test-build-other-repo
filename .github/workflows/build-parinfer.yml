@@ -10,9 +10,9 @@ jobs:
       - uses: actions/checkout@master
         with:
           repository: eraserhd/parinfer-rust
-      - uses: actions-rs/toolchain@master
-        with:
-          toolchain: stable
+#      - uses: actions-rs/toolchain@master
+#        with:
+#          toolchain: stable
 #      - name: Install targets
 #        run: |
 #          sudo apt-get install -y mingw-w64
@@ -21,15 +21,15 @@ jobs:
       - uses: Shogan/rust-musl-action@master
         with:
           args: cargo build --target x86_64-apple-darwin --release
-      - uses: Shogan/rust-musl-action@master
-        with:
-          args: cargo build --target x86_64-unknown-linux-musl --release
-      - uses: Shogan/rust-musl-action@master
-        with:
-          args: cargo build --target aarch64-unknown-linux-musl --release
-      - uses: Shogan/rust-musl-action@master
-        with:
-          args: cargo build --target x86_64-pc-windows-gnu --release
+#      - uses: Shogan/rust-musl-action@master
+#        with:
+#          args: cargo build --target x86_64-unknown-linux-musl --release
+#      - uses: Shogan/rust-musl-action@master
+#        with:
+#          args: cargo build --target aarch64-unknown-linux-musl --release
+#      - uses: Shogan/rust-musl-action@master
+#        with:
+#          args: cargo build --target x86_64-pc-windows-gnu --release
       - run: ls --recursive target
 
 #      - uses: actions/upload-artifact@v3.1.0
