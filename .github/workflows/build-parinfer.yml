@@ -5,7 +5,10 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest macOS-latest windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@master
         with:
@@ -14,3 +17,10 @@ jobs:
         with:
           toolchain: stable
       - run: cargo build --release
+      - uses: actions/upload-artifact@v3.1.0
+        with:
+          path: |
+            target/release/libparinfer_rust.dylib
+            target/release/libparinfer_rust.so
+            target/release/parinfer_rust.dll
+
