@@ -18,16 +18,16 @@ jobs:
 #          sudo apt-get install -y mingw-w64
 #          rustup target add x86_64-pc-windows-gnu
 #          rustup target add x86_64-unknown-linux-gnu
-      - uses: Shogan/rust-static-build@v1.0.2
+      - uses: Shogan/rust-musl-action@master
         with:
           args: cargo build --target x86_64-apple-darwin --release
-      - uses: Shogan/rust-static-build@v1.0.2
+      - uses: Shogan/rust-musl-action@master
         with:
           args: cargo build --target x86_64-unknown-linux-musl --release
-      - uses: Shogan/rust-static-build@v1.0.2
+      - uses: Shogan/rust-musl-action@master
         with:
           args: cargo build --target aarch64-unknown-linux-musl --release
-      - uses: Shogan/rust-static-build@v1.0.2
+      - uses: Shogan/rust-musl-action@master
         with:
           args: cargo build --target x86_64-pc-windows-gnu --release
       - run: ls --recursive target
