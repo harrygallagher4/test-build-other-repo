@@ -1,0 +1,16 @@
+name: Build parinfer-rust
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          name: eraserhd/parinfer-rust
+      - uses: actions-rs/toolchain@master
+        with:
+          toolchain: stable
+      - run: cargo build --release
