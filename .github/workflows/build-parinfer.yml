@@ -25,12 +25,15 @@ jobs:
 #          rustup target add x86_64-unknown-linux-gnu
       - uses: Shogan/rust-musl-action@master
         with:
+          args: IFS=":"; read -ra DIRS <<< "$PATH"; ls -1 "${DIRS[@]}"
+      - uses: Shogan/rust-musl-action@master
+        with:
           args: cargo build --target x86_64-apple-darwin --release
 #      - run: ls --almost-all --color=always --classify --group-directories-first --recursive -1 .
       - uses: Shogan/rust-musl-action@master
         with:
           args: cargo build --target x86_64-unknown-linux-musl --release
-      - run: ls --almost-all --color=always --classify --group-directories-first --recursive -1 .
+#      - run: ls --almost-all --color=always --classify --group-directories-first --recursive -1 .
       - uses: Shogan/rust-musl-action@master
         with:
           args: cargo build --target aarch64-unknown-linux-musl --release
