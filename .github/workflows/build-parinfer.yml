@@ -5,10 +5,7 @@ on:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        os: [ubuntu-latest macOS-latest windows-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
         with:
@@ -16,11 +13,29 @@ jobs:
       - uses: actions-rs/toolchain@master
         with:
           toolchain: stable
-      - run: cargo build --release
-      - uses: actions/upload-artifact@v3.1.0
+#      - name: Install targets
+#        run: |
+#          sudo apt-get install -y mingw-w64
+#          rustup target add x86_64-pc-windows-gnu
+#          rustup target add x86_64-unknown-linux-gnu
+      - uses: Shogan/rust-static-build@v1.0.2
         with:
-          path: |
-            target/release/libparinfer_rust.dylib
-            target/release/libparinfer_rust.so
-            target/release/parinfer_rust.dll
+          args: cargo build --target x86_64-apple-darwin --release
+      - uses: Shogan/rust-static-build@v1.0.2
+        with:
+          args: cargo build --target x86_64-unknown-linux-musl --release
+      - uses: Shogan/rust-static-build@v1.0.2
+        with:
+          args: cargo build --target aarch64-unknown-linux-musl --release
+      - uses: Shogan/rust-static-build@v1.0.2
+        with:
+          args: cargo build --target x86_64-pc-windows-gnu --release
+      - run: ls --recursive target
+
+#      - uses: actions/upload-artifact@v3.1.0
+#        with:
+#          path: |
+#            target/release/libparinfer_rust.dylib
+#            target/release/libparinfer_rust.so
+#            target/release/parinfer_rust.dll
 
